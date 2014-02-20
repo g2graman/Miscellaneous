@@ -22,3 +22,7 @@ class Stack(object):
 
   def is_empty(self): 
     return self.length == 0
+
+
+  def __repr__(self):
+    return str(self.elements)

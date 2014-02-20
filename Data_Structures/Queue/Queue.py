@@ -4,8 +4,9 @@ class Queue(object):
     self.items = []
     self.head = 0
 
+
   def is_empty(self): 
-    return (self.length - self.head <= 0) 
+    return (self.get_size() <= 0) 
 
 
   def enqueue(self, element):
@@ -29,3 +30,7 @@ class Queue(object):
     if(0 <= self.head < self.length):
       return str(self.items[self.head:])
     return str([])
+
+
+  def get_size(self):
+    return self.length - self.head

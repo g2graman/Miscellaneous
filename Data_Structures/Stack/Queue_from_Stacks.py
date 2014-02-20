@@ -25,3 +25,6 @@ class Queue_from_Stacks(object):
       self.length -= 1
       return self.out_stack.pop()
 
+
+  def __repr__(self):
+    return "IN: " + str(self.in_stack) + "\nOUT: " + str(self.out_stack)
