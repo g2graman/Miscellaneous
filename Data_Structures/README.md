@@ -15,16 +15,14 @@ The remaining data structures to be implemented as a part of this repository:
 	Van Emde Boas Tree
 	Wavelet tree
 
+	|Min-Heap (and heapsort)
+	|Max-heap (and heapsort)
 	|Implicit Kd-Tree
 	|Max Kd-Tree
 	|Min Kd-Tree
 
 	disjoint sets
 
-	|Min-Heap (bulk-loaded, and heapsort)
-	|Max-heap (bulk-loaded, and heapsort)
-	|Min-Max-Heap
-	|Interval heap
 	|soft heap
 	|fibonacci heap
 	|leonardo heap (and smoothsort)
