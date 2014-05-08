@@ -1,0 +1,1 @@
+The two subfolders contained in this directory are to distinguish implicit kd-trees (whose index in a list, similar to a heap, can be used to infer a node's position in the tree) from explicit kd-trees which explicitly store the pointers to traverse the tree.
