@@ -4,7 +4,6 @@ The remaining data structures to be implemented as a part of this repository:
 	
     SkipList (with augmentations)
 
-	|BST
     |Randomized Binary Search Tree
     
     |AVL Tree (with order statistic augmentations)

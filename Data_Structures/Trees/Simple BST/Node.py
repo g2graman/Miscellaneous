@@ -32,6 +32,10 @@ class Node(object):
 		return self
 
 
+	def find_parent(self, val):
+		return self.find(val).parent
+
+
 	def contains(self, val):
 		return self.find(val).key == val
 
@@ -41,8 +45,10 @@ class Node(object):
 		if(f_node and f_node.key != val):
 			if(val > f_node.key):
 				f_node.right = Node(val)
+				f_node.right.parent = f_node
 			else:
 				f_node.left = Node(val)
+				f_node.left.parent = f_node
 
 
 	def print_tree(self):
@@ -67,22 +73,33 @@ class Node(object):
 
 
 	def remove(self, val):
+		assert(self.key != val)
 		self._remove(self, val)
 
 	def _remove(self, root, val):
-		r_node = self.find(val)
-		if(r_node != self):
+		p_node = self.find_parent(val)
+		if(val > p_node.key):
+			r_node = p_node.right
+		elif(val < p_node.key):
+			r_node = p_node.left
+		else:
+			r_node = p_node
+
+		if(r_node):
 			if(r_node.left):
 				if(r_node.right):
-					s = successor(root)
-					s.left = root.left
-					s.right = root.right
-					root = s
+					s = self.successor(r_node)
+					s.left = r_node.left
+					s.parent = p_node
+					s.left.parent = s
+					p_node.right = s
 				else:
-					root = r_node.left
+					r_node.left.parent = p_node
+					p_node.left = r_node.left
 			else:
 				if(r_node.right):
-					root = r_node.right
+					r_node.right.parent = p_node
+					p_node.right = r_node.right
 
 
 	def successor(self, root):

@@ -8,11 +8,11 @@ import os
 class KDTree(object):
     ##PRECONDITION: Nodes cannot have the same x, y, r, g, or b values.
 
-    def __init__(self, nodes, dim):
+    def __init__(self, nodes):
         '''(KDTree, list of Nodes, int) -> NoneType
         Make a new KDTree.'''
 
-        self.dim = dim
+        self.dim = Node.dim
         self.root = self.build_tree(nodes)
         self.num = len(nodes)
 
@@ -678,7 +678,7 @@ if __name__ == '__main__':
             nodes.append(Node(i, 2*i, 3*i, 4*i, 5*i))
 
 
-    tree = KDTree(nodes, 5)
+    tree = KDTree(nodes)
     print "root: " + str(tree)
     #print tree.flat(tree.build_tree(nodes))
     big = tree.largest(tree.root)
