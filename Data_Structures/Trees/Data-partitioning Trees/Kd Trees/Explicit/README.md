@@ -1,0 +1,1 @@
+The explicit kd-tree was built using the supplied Node class (found in ./node.py). It can be modified by changing the field list of the class's dimensions denoted p, and the static variable Node.dim which is set to 5 by default. Node has these settings by default because I was storing pictures as kd-trees of (r, g, b, x, y) tuples and analyzing the resulting trees.
