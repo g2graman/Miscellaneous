@@ -11,6 +11,7 @@ class RB_Node(Node):
 		self.height = 0
 
 
+	#Overrides parent method
 	def insert(self, val):
 		self.__insert(val)
 
@@ -19,6 +20,7 @@ class RB_Node(Node):
 		pass
 
 
+	#Overrides parent method
 	def remove(self, val):
 		assert(self.key != val)
 		self.__remove(val)	
