@@ -14,8 +14,6 @@ The remaining data structures to be implemented as a part of this repository:
 	Van Emde Boas Tree
 	Wavelet tree
 
-	|Min-Heap (and heapsort)
-	|Max-heap (and heapsort)
 	|Implicit Kd-Tree
 	|Max Kd-Tree
 	|Min Kd-Tree
