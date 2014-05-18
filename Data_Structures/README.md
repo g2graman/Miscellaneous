@@ -2,7 +2,7 @@
 
 The remaining data structures to be implemented as a part of this repository:
 	
-    SkipList (with augmentations)
+    SkipList (with augmentations)		[Requires overhaul]
 
     |Randomized Binary Search Tree
     
@@ -11,7 +11,7 @@ The remaining data structures to be implemented as a part of this repository:
     |2-3-4 Tree
     |B-Tree
     
-	Van Emde Boas Tree
+	Van Emde Boas Tree		[Might not implement]
 	Wavelet tree
 
 	|Implicit Kd-Tree
