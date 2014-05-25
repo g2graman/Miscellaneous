@@ -8,14 +8,15 @@ def bf_update(root, inserted):
 	current = inserted
 	while(current.parent != current):
 		if (current == current.parent.right):
-			current.parent.bf += 1
-			if (current.parent.bf == 2):
-				root = AVL_Node.rotations[(2, current.bf)](current.parent)
+			current.parent.bf += 1		
 		elif (current == current.parent.left):
 			current.parent.bf -= 1
-			if (current.parent.bf == -2):
-				root = AVL_Node.rotations[(-2, current.bf)](current.parent)
+
+		if (abs(current.parent.bf) == 2):
+				root = AVL_Node.rotations[(current.parent.bf, current.bf)](current.parent)
+				break 
 		current = current.parent
+	current = current.parent
 
 
 def sleft_rot(root):
@@ -26,7 +27,7 @@ def sleft_rot(root):
 	root.left = A
 	A.right = moving
 	
-	#update parents of moved swapped subtrees
+	#update parents of swapped subtrees
 	if(A != A.parent):
 		root.parent = A.parent
 	else:
@@ -61,14 +62,15 @@ class AVL_Node(Node):
 		(-2, 1): dlr_rot,
 		(-2, -1): sright_rot}
 
-	def __init__(self, key, left=None, right=None):
+	def __init__(self, key, name='', left=None, right=None):
 		super(AVL_Node, self).__init__(key, left, right)
 		self.bf = 0
+		self.name = name
 
 
 	#Overrides parent method
 	def insert(self, val):
-		self.__insert(val)
+		self = self.__insert(val)
 
 
 	def __insert(self, val):
@@ -84,6 +86,19 @@ class AVL_Node(Node):
 		
 		inserted.parent = fnode
 		bf_update(self, inserted)
+		
+		
+		'''
+		
+		Use the name of the variable to get around scope issue and
+		swao the node with its parent. Since bf_update should return the
+		root of the tree, this will only make a difference if, due to
+		issues in scope, self != self.parent. 
+		
+		'''
+		
+		if(self.name):
+			globals()[self.name] = self.parent
 
 
 	def print_bf(self):
@@ -107,3 +122,8 @@ class AVL_Node(Node):
 
 	def __remove(self, val):
 		pass
+
+if __name__ == '__main__':
+	n = AVL_Node(5, 'n')
+	n.insert(6)
+	n.insert(7)
