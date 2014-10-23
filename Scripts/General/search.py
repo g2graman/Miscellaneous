@@ -48,7 +48,7 @@ def search(L, elem):
   dim = 0;
   while(len(temp) > 1):
     mid = len(temp) / 2
-    if (elem[dim] <= temp[mid][0]):
+    if (elem[dim] <= temp[mid][dim]):
       temp = temp[:mid+1]
     else:
       temp = temp[mid+1:]
