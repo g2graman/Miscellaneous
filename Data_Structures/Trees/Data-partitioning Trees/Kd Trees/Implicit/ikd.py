@@ -1,3 +1,6 @@
+import os
+
+
 class ImplicitKDTree(object):
 	'''An Implicit min kd-tree. To turn into max kd-tree,
 	change self._bubble_up(list, int), self._bubble_down(int),
@@ -351,11 +354,75 @@ class ImplicitKDTree(object):
 		return result
 
 
+	def print_tree(self):
+		'''(ImplicitKDTree) -> NoneType
+		Print ImplicitKDTree.'''
+
+		self._print_tree(0, '')
+
+
+	def _print_tree(self, index, indent, i=1):
+		'''(ImplicitKDTree, Node, str, int) -> NoneType
+		Print the tree rooted at root. Print indent (which consists only of
+		whitespace) before the root value; indent more for the subtrees
+		so that it looks nice.'''
+
+		if index < self.num:
+			self._print_tree(self._right_child(index), indent + '        |' + str(i) + "| ", \
+			i + 1)
+			print indent + str(self.nodes[index])
+			self._print_tree(self._left_child(index), indent + '        |' + str(i) + "| ", \
+			i + 1)
+
+
+	def write_tree(self):
+		'''(ImplicitKDTree) -> NoneType
+		Write the string representation of ImplicitKDTree to 'tree.txt'
+		in the same directory.'''
+
+		if os.path.exists('tree.txt'):
+			os.remove('tree.txt')
+
+		FILE = open('tree.txt', 'w')
+		FILE.writelines(self.nodes)
+		FILE.close()
+
+
+	def mod(self, expr, index=0):
+		'''(ImplicitKDTree, str) -> NoneType
+		Recursively modify ImplicitKDTree rooted at the node at index index and all
+		its children to store the evaluation of str expr in their cargo.
+		*Warning*: increases self.dim by 1 to account for cargo in tuples!
+		Also note that eval is used, so you might run into an error. '''
+
+		self.dim += 1
+		self.nodes = [tuple(list(t) + [0]) for t in self.nodes] #append 0 to all nodes
+		return self._mod(expr, self.root, 0)
+
+
+	def _mod(self, expr, index=0, depth=0):
+		'''(ImplicitKDTree, str, int, int) -> NoneType.'''
+
+		if index < self.num:
+			self[index][self.dim - 1] = eval(expr) #set placeholders
+			self._mod(expr, self._right_child(index), depth + 1)
+			self._mod(expr, self._left_child(index), depth + 1)
+
+	def de_mod(self):
+		'''(ImplicitKDTree) -> NoneType
+		Removes last field of all tuples in ImplicitKDTree. '''
+
+		if self.dim > 0 :
+			self.dim -= 1
+			self.nodes = [tuple(list(t)[:self.dim]) for t in self.nodes]
+		else:
+			self.nodes = []
+			self.num = 0
+
+
 if __name__ == '__main__':
 	nodes = []
 	for i in range(0, 50000, 5):
 	nodes.append((i, i + 1, i + 2, i + 3, i + 4))
 	tree = ImplicitKDTree(nodes, 5)
 	del nodes
-
-	## TODO: make write_tree(), print_tree()
