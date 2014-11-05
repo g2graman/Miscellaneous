@@ -5,7 +5,7 @@ def sort(L):
   must have the same number of dimensions.'''
 
   m_len = len(max(L, key=len))
-  assert(all([len(x) == m_len for x in L]))
+  assert(all([len(x) == m_len for x in L])) #Make sure all elements have same length
   return _sort(L, 0, m_len)
 
 
@@ -20,10 +20,10 @@ def _sort(L, dim, m_dim=0):
 
   left, right = [], []
   mid = len(L) / 2
-  med = sorted(L, key=lambda x: x[dim])[mid]
+  med = sorted(L, key=lambda x: x[dim])[mid][dim] #Find the median along the cutting axis
 
   left = [x for x in L if x[dim] < med]
-  right = left = [x for x in L if x[dim] > med]
+  right = [x for x in L if x[dim] > med]
   result = list(set(L) - set(left + right))
 
   left = _sort(left, (dim + 1) % m_dim, m_dim)
