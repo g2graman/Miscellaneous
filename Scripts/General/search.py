@@ -20,6 +20,12 @@ def _sort(L, dim, m_dim=0):
 
   left, right = [], []
   mid = len(L) / 2
+  
+  '''TODO: Replace with selection algorithm for finding median in O(n) instead of having to sort data along every cutting axis.
+  For O(n + klog(n)) complexity of finding k order statistics, bulk load a min-max heap. 
+  
+  http://cglab.ca/~morin/teaching/5408/refs/minmax.pdf
+  '''
   med = sorted(L, key=lambda x: x[dim])[mid][dim] #Find the median along the cutting axis
 
   left = [x for x in L if x[dim] < med]
